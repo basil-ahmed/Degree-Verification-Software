@@ -1,0 +1,61 @@
+.verification-container {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .verification-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .verification-header img {
+    width: 100px; /* Adjust as needed */
+  }
+  
+  .verification-header h1 {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .logout-button {
+    background-color: #ddd;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .main-content h2 {
+    background-color: #eee;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .student-info {
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .info-block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    padding: 10px;
+  }
+  
+  .info-block label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .info-value {
+    background-color: #e0e0e0;
+    padding: 10px;
+    width: 70%;
+  }
+  
