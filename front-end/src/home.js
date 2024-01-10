@@ -17,10 +17,11 @@ const Home = () => {
   useEffect(() => {
 
     const scanner = new Html5QrcodeScanner('reader',
-    { fps: 5, qrbox: {
+    { qrbox: {
       width: 500,
       height: 500
-    } });
+    },
+    fps: 5});
 
     scanner.render(onScanSuccess, onScanFailure);
 
@@ -96,11 +97,11 @@ const Home = () => {
         <form onSubmit={handleVerify}>
           <div className="input-group">
             <label htmlFor="degreeSerialNo">Degree Serial No:</label>
-            <input id="degreeSerialNo" type="text" placeholder="Enter Serial No Here" required value={degreeSerialNo} onChange={e => setDegreeSerialNo(e.target.value)} />
+            <input id="degreeSerialNo" type="text" className='inputBox' placeholder="Enter Serial No Here" required value={degreeSerialNo} onChange={e => setDegreeSerialNo(e.target.value)} />
           </div>
           <div className="input-group">
             <label htmlFor="studentRegistrationNo">Student Reg No:</label>
-            <input id="studentRegistrationNo" type="text" placeholder="Enter Student Reg No Here" required value={studentRegistrationNo} onChange={e => setstudentRegistrationNo(e.target.value)} />
+            <input id="studentRegistrationNo" className='inputBox' type="text" placeholder="Enter Student Reg No Here" required value={studentRegistrationNo} onChange={e => setstudentRegistrationNo(e.target.value)} />
           </div>
           {errorMessage && <p>{errorMessage}</p>}
           <button ref={verifyButtonRef} type="submit" className="verify-button">Verify</button>

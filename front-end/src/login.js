@@ -41,16 +41,17 @@ const Login = () => {
     <div className="login-container">
       <h2>PUMHSW ADMISSION PORTAL</h2>
       <h3>PUMHSW Admission Portal for DPT, PHARM-D, BSPH, BS NURSING</h3>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className='login-form' 
+      onSubmit={handleSubmit}>
+        <label className='login-label'>
           CNIC:
-          <input type="text" value={cnic} onChange={(e) => setCnic(e.target.value)} />
+          <input type="text" className='login-input' value={cnic} onChange={(e) => setCnic(e.target.value)} />
         </label>
-        <label>
+        <label className='login-label'>
           Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" className='login-input' value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>
-        <button type="submit">Login</button>
+        <button type="submit" className='login-button'>Login</button>
       </form>
       <p>Dont't have an account? <a href="/signup">Sign Up</a></p>
     </div>
