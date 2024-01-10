@@ -19,7 +19,7 @@ mongoose
 
 // load the dataabase models we want to deal with
 const { User } = require('./models/User')
-
+const { Degree } = require('./models/Degree')
 
 app.get("/", (req, res) => {
     res.send("Hello!")
@@ -58,6 +58,19 @@ app.post("/api/signup", async (req, res) => {
 app.get("/api/home", (req, res) => {
     // User is authenticated, send home data
     res.json({ success: true, data: 'Home data' });
+});
+
+app.post("/api/verification", async (req, res) => {
+    const { degreeSerialNo, studentRegistrationNo } = req.body;
+
+    // Find degree with provided Degree Serial No and Student Registration No
+    const degree = await Degree.findOne({ degreeSerialNo, studentRegistrationNo });
+    if (!degree) {
+      return res.status(400).json({ success: false, message: "Invalid Degree Serial No or Student Registration No." });
+    }
+  
+    // Degree is found, return the degree
+    res.json({ success: true, degree });
   });
 
 app.use(expressJwt({ secret: 'BASIL', algorithms: ['HS256'] }).unless({ path: ['/api/login', '/api/signup'] }));
