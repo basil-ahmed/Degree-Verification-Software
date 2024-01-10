@@ -1,36 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { QrReader } from 'react-qr-reader'; // Import QrReader
+import {Html5QrcodeScanner} from 'html5-qrcode'; // Import QR scanner
 import './home.css';
 
 const Home = () => {
 
   const navigate = useNavigate(); // Get the navigate function
-  const [showScanner, setShowScanner] = useState(false); // State to toggle QR scanner
-  const [isScanning, setIsScanning] = useState(false);
+  const [scanResult, setScanResult] = useState(null); // State to store scan results
 
   useEffect(() => {
-    return () => {
-      setIsScanning(false);
-    };
+
+    const scanner = new Html5QrcodeScanner('reader',
+    { fps: 5, qrbox: {
+      width: 250,
+      height: 250
+    } });
+
+    scanner.render(onScanSuccess, onScanFailure);
+
+    function onScanSuccess(qrCodeMessage) {
+      scanner.clear();
+      setScanResult(qrCodeMessage);
+    }
+
+    function onScanFailure(error) {
+      // handle scan failure, usually better to ignore and keep scanning.
+      console.warn(`QR error = ${error}`);
+      // scanner.clear();
+    }
+
+    // Cleanup function
+  return () => {
+    scanner.clear();
+  };
+
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('token'); // Clear the token from local storage
     navigate('/'); // Redirect the user to the login page
-  };
-
-  const handleScan = data => {
-    if (data) {
-      console.log('QR code data:', data);
-      setIsScanning(false);
-      setShowScanner(false); // Hide scanner after successful scan
-    }
-  };
-
-  const handleError = err => {
-    console.error(err);
-    setIsScanning(false);
   };
 
   const handleVerify = (e) => {
@@ -57,18 +65,12 @@ const Home = () => {
             <input id="studentRegNo" type="text" placeholder="Enter Student Reg No Here" />
           </div>
           <button type="submit" className="verify-button">Verify</button>
-          <button type="button" onClick={() => { 
-            setShowScanner(true); 
-            setTimeout(() => setIsScanning(true), 1000); // Add a delay before setting isScanning to true
-          }}>Scan QR Code</button>
-          {showScanner && isScanning && ( // Show QR scanner when showScanner is true
-          <QrReader
-            delay={300}
-            onError={handleError}
-            onResult={handleScan}
-            style={{ width: '100%' }}
-          />
-        )}
+          {/* <button type="button">Scan QR Code</button> */}
+          { scanResult
+            ? <div className="scan-result">{scanResult}</div>
+            : <div id="reader"></div>
+          }
+         
         </form>
       </main>
     </div>
