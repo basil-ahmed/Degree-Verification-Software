@@ -1,11 +1,23 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import './verificationPage.css';
 
 const VerificationPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const degree = location.state.degree;
+
+    useEffect(() => {
+      // Change the background color when the component mounts
+      document.body.style.background = `url('/bg2.jpeg')`;
+  
+      // Reset the background color when the component unmounts
+      return () => {
+        document.body.style.background = null;
+      };
+    }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
+  
 
     const handleLogout = () => {
         localStorage.removeItem('token'); // Clear the token from local storage
@@ -20,10 +32,10 @@ const VerificationPage = () => {
       <header className="verification-header">
         <img src="/logo.png" alt="Peoples University of Medical & Health Sciences for Women" />
         <h1>Peoples University of Medical & Health Sciences for Women</h1>
-        <button className="logout-button" onClick={handleLogout}>LOG OUT</button>
+        <button className="verify-logout-button" onClick={handleLogout}>LOG OUT</button>
       </header>
-      <main className="main-content">
-        <h2>OFFICE OF THE REGISTRAR</h2>
+      <main className="verification-main-content">
+        <h2>VERIFIED DEGREE DETAILS ✅</h2>
         <div className="student-info">
           <div className="info-block">
             <label>Student's Name</label>

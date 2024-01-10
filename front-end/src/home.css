@@ -1,9 +1,10 @@
 .home-container {
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
   text-align: center;
+  align-content: center;
 }
 
 .home-header {
@@ -11,6 +12,9 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
 }
 
 .home-header img {
@@ -23,24 +27,55 @@
 }
 
 .logout-button {
-  background-color: #ddd;
+  background-color: #ff00005f;
+  color: white;
   border: none;
   padding: 10px 20px;
+  border-radius: 4px;
   cursor: pointer;
+  /* width: 100%; */
+  margin-top: 10px;
+}
+
+.logout-button:hover {
+  background-color: #ff0000;
+}
+
+.main-content {
+  background-color: rgb(238, 238, 238);
+  width: 70%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  padding: inherit;
+  align-content: center;
+  align-items: center;
+  border: 2px solid black;
+  padding-top: 0px;
+  border-radius: 8px;
+  background: url('../public/bg2.jpeg') no-repeat center center fixed;
+  /* -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
 }
 
 .main-content h2 {
-  background-color: #eee;
+  width: 100%;
+  /* background-color: #eee; */
   padding: 10px;
   margin-bottom: 20px;
 }
 
 .input-group {
   margin-bottom: 10px;
+  text-align: left;
 }
 
 .inputBox {
-  width: 100%;
+  width: 92.5%;
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
@@ -56,6 +91,7 @@
   cursor: pointer;
   width: 100%;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .verify-button:hover {

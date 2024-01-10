@@ -40,9 +40,14 @@ const Home = () => {
       // scanner.clear();
     }
 
+    // Change the background color when the component mounts
+    document.body.style.background = `url('/bg2.jpeg')`;
+    // document.body.style.background = "#f9f9f9";
+ 
     // Cleanup function
   return () => {
     scanner.clear();
+    document.body.style.background = null;
   };
 
   }, []);

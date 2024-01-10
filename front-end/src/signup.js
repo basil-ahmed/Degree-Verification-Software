@@ -70,18 +70,23 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      <h2>PUMHSW ADMISSION PORTAL</h2>
+      <div className="left-side" style={{ flex: 1 }}>
+      <img src="/logo.png" alt="Peoples University of Medical & Health Sciences for Women" />
+      <h2>PUMHSW VERIFICATION PORTAL</h2>
       <h3>PUMHSW Admission Portal for DPT, PHARM-D, BSPH, BS NURSING</h3>
-      <form onSubmit={handleSubmit} className='submit-form'>
-        <input type="text" placeholder="Username" className='signup-input' value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="text" placeholder="13-Digit CNIC (without dashes)" className='signup-input' value={cnic} onChange={(e) => setCnic(e.target.value)} />
-        <input type="text" placeholder="11-Digit Mobile # 03XXXXXXXXX" className='signup-input' value={mobile} onChange={(e) => setMobile(e.target.value)} />
-        <input type="email" placeholder="Email" className='signup-input' value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password (6+ characters)" className='signup-input' value={password} onChange={(e) => setPassword(e.target.value)} />
-        <input type="password" placeholder="Confirm Password" className='signup-input' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-        <button type="submit" className='signup-button'>Register</button>
-      </form>
-      <p>Already have an account? <a href="/">Login</a></p>
+    </div>
+      <div className="right-side" style={{ flex: 1 }}>
+        <form onSubmit={handleSubmit} className='submit-form'>
+          <input type="text" placeholder="Username" className='signup-input' value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input type="text" placeholder="13-Digit CNIC (without dashes)" className='signup-input' value={cnic} onChange={(e) => setCnic(e.target.value)} />
+          <input type="text" placeholder="11-Digit Mobile # 03XXXXXXXXX" className='signup-input' value={mobile} onChange={(e) => setMobile(e.target.value)} />
+          <input type="email" placeholder="Email" className='signup-input' value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="password" placeholder="Password (6+ characters)" className='signup-input' value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" placeholder="Confirm Password" className='signup-input' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          <button type="submit" className='signup-button'>Register</button>
+        </form>
+        <p>Already have an account? <a href="/">Login</a></p>
+      </div>
     </div>
   );
 };
