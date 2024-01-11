@@ -41,7 +41,7 @@ return (
   <div className="login-container" style={{ display: 'flex' }}>
     <div className="left-side" style={{ flex: 1 }}>
       <img src="/logo.png" alt="Peoples University of Medical & Health Sciences for Women" />
-      <h2>PUMHSW VERIFICATION PORTAL</h2>
+      <h2>PUMHSW DEGREE VERIFICATION PORTAL</h2>
       <h3 className='login-desc'>PUMHSW Admission Portal for DPT, PHARM-D, BSPH, BS NURSING</h3>
     </div>
     <div className="right-side" style={{ flex: 1 }}>
