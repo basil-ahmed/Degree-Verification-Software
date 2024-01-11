@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import {Html5QrcodeScanner} from 'html5-qrcode'; // Import QR scanner
 import './home.css';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = "degree-verification-software-server.vercel.app";
 
 const Home = () => {
 
