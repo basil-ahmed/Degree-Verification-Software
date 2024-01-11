@@ -6,7 +6,17 @@ const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken');
 const { expressjwt: expressJwt } = require('express-jwt');
 
-app.use(cors()) // use cors middleware
+// Allow requests from the specified origin (replace 'http://your-react-app-url' with the actual URL)
+const corsOptions = {
+  origin: 'http://your-react-app-url',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+// app.use(cors(corsOptions));
+
+app.use(cors(corsOptions)) // use cors middleware
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
