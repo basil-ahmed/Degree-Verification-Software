@@ -70,5 +70,5 @@ Upon successful verification, users are redirected to the verified page, showcas
 
 Feel free to explore and enhance the Degree Verification Software for a seamless and secure user experience!
 
-Demo:
+## Demo:
 ![website](https://github.com/basil-ahmed/Degree-Verification-Software/assets/90772853/a4c6440a-9ee1-4e4f-a840-212aaf086d14)
