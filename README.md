@@ -1,6 +1,5 @@
 ![Vercel](https://vercelbadge.vercel.app/api/basil-ahmed/Degree-Verification-Software)
 [![Deployed](https://img.shields.io/badge/Deployed-Live-brightgreen.svg)]([http://128.199.12.71/](https://degree-verification-software.vercel.app/))
-![CI/CD](https://github.com/basil-ahmed/Degree-Verification-Software/workflows/CI/badge.svg)
 
 # Degree Verification Software
 
