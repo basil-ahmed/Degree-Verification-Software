@@ -1,4 +1,4 @@
-# Degree Verification Software
+# Degree Verification Software (VERCEL VERSION)
 
 ## Overview
 Welcome to the Degree Verification Software created using MERN (MongoDB, Express.js, React, Node.js) stack technology. This application provides a seamless process for verifying degree details of students at Peoples University of Medical & Health Sciences for Women (PUMHSW).
