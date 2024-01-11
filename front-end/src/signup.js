@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+// require("dotenv").config({ silent: true })
 import './signup.css';
 
-const BACKEND_URL = 'http://localhost:5002';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -48,7 +49,7 @@ const Signup = () => {
     };
   
     // Send user data to your backend
-    fetch(`${BACKEND_URL}/api/signup`, { // replace '/api/signup' with your actual signup API endpoint
+    fetch(`${BACKEND_URL}/api/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
