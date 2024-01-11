@@ -60,6 +60,8 @@ Upon successful verification, users are redirected to the verified page, showcas
 - JWT Tokens & Passport.js: For Authentication
 - HTML5, CSS3: Markup and styling for web pages
 - HTML5 QR Code Scanner: Library for scanning QR codes in the browser
+- Vercel Continuous Integration
+- Vercel Web Analytics
 
 ## How to Run
 1. Clone the repository: `git clone https://github.com/your_username/degree-verification-software.git`
