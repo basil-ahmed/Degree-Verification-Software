@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // require("dotenv").config({ silent: true })
 import './signup.css';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = "https://degree-verification-software-server.vercel.app";
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -60,6 +60,8 @@ const Signup = () => {
     .then(data => {
       if (data.success) {
         alert("Registration successful!");
+        // Redirect the user to the home page
+        window.location.href = '/';
       } else {
         alert("Registration failed: " + data.message);
       }

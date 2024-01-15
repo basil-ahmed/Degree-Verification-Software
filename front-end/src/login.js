@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // require("dotenv").config({ silent: true })
 import './login.css';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = "https://degree-verification-software-server.vercel.app";
 
 const Login = () => {
  const [cnic, setCnic] = useState('');
