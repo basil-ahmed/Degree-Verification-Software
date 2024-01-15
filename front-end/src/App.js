@@ -4,6 +4,7 @@ import Login from './login';
 import Signup from './signup';
 import Home from './home';
 import VerificationPage from './verificationPage';
+import Report from './report';
 import { inject } from '@vercel/analytics';
 import { injectSpeedInsights } from "@vercel/speed-insights"
  
@@ -24,6 +25,8 @@ const App = () => {
         <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/" />} />
 
         <Route path="/verificationPage" element={isAuthenticated ? <VerificationPage /> : <Navigate to="/" />} />
+
+        <Route path="/report" element={isAuthenticated ? <Report /> : <Navigate to="/" />} />
 
         {/* Add a catch-all route */}
         <Route path="*" element={<Navigate to="/" />} />

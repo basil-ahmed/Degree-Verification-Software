@@ -60,6 +60,8 @@ const Signup = () => {
     .then(data => {
       if (data.success) {
         alert("Registration successful!");
+        // Redirect the user to the home page
+        window.location.href = '/';
       } else {
         alert("Registration failed: " + data.message);
       }
