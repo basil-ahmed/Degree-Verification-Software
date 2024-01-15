@@ -5,9 +5,10 @@ import Signup from './signup';
 import Home from './home';
 import VerificationPage from './verificationPage';
 import { inject } from '@vercel/analytics';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { injectSpeedInsights } from "@vercel/speed-insights"
  
 inject();
+injectSpeedInsights();
 
 const App = () => {
   const isAuthenticated = !!localStorage.getItem('token'); // Update this to your actual authentication check
