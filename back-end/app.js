@@ -36,7 +36,7 @@ app.post("/api/login", async (req, res) => {
 
   // User is authenticated, generate a JWT
   const token = jwt.sign({ _id: user._id }, 'BASIL', { expiresIn: '1h' });
-  res.json({ success: true, token });
+  res.json({ success: true, token, user: user });
 });
 
 app.post("/api/signup", async (req, res) => {

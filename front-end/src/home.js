@@ -64,6 +64,10 @@ const Home = () => {
     navigate('/'); // Redirect the user to the login page
   };
 
+  const handleReport = async (e) => {
+    navigate('/report');
+  };
+
   const handleVerify = async (e) => {
     e.preventDefault();
   
@@ -96,6 +100,7 @@ const Home = () => {
       <header className="home-header">
         <img src="/logo.png" alt="Peoples University of Medical & Health Sciences for Women" />
         <h1>Peoples University of Medical & Health Sciences for Women</h1>
+        <button className="report-button" onClick={handleReport}>GET REPORT</button>
         <button className="logout-button" onClick={handleLogout}>LOG OUT</button>
       </header>
       <main className="main-content">
