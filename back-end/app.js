@@ -8,7 +8,7 @@ const { expressjwt: expressJwt } = require('express-jwt');
 
 // Allow requests from the specified origin (replace 'http://your-react-app-url' with the actual URL)
 const corsOptions = {
-  origin: 'https://degree-verification-software.vercel.app',
+  origin: ['https://degree-verification-software.vercel.app', 'https://degree-verification-software-server.vercel.app'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
