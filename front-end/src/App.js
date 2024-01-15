@@ -5,6 +5,7 @@ import Signup from './signup';
 import Home from './home';
 import VerificationPage from './verificationPage';
 import { inject } from '@vercel/analytics';
+import { SpeedInsights } from "@vercel/speed-insights/next"
  
 inject();
 
