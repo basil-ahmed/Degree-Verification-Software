@@ -70,9 +70,9 @@ const Report = () => {
             <label>User's Mobile</label>
             <div className="info-value">{report.mobile}</div>
           </div>
-          <div className="info-block">
-          <label>Verified Degrees</label>
-          <div className="info-value" onClick={handleDegreeDropdownClick}>
+          <div className="info-block" onClick={handleDegreeDropdownClick}>
+          <label>Verified Degrees ⬇</label>
+          <div className="info-value">
             {report.verifiedDegrees.length}
           </div>
           {degreeDropdownOpen && (
