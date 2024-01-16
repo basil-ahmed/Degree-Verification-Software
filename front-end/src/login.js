@@ -1,42 +1,86 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 // require("dotenv").config({ silent: true })
 import './login.css';
 
 const BACKEND_URL = "https://degree-verification-software-server.vercel.app";
 
 const Login = () => {
+
+ const navigate = useNavigate(); // Get the navigate function
+ 
  const [cnic, setCnic] = useState('');
  const [password, setPassword] = useState('');
 
- const handleSubmit = (e) => {
+//  const handleSubmit = (e) => {
+//   e.preventDefault();
+
+//   // Create user object
+//   const user = {
+//     cnic,
+//     password
+//   };
+
+//   // Send user data to your backend
+//   fetch(`${BACKEND_URL}/api/login`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(user),
+//   })
+//   .then(response => response.json())
+//   .then(data => {
+//     if (data.success) {
+//       // Save the JWT to local storage
+//       localStorage.setItem('token', data.token);
+//       // Redirect the user to the home page
+//       window.location.href = '/home';
+//     } else {
+//       alert(data.message);
+//     }
+//   });
+// };
+
+const handleSubmit = async (e) => {
   e.preventDefault();
 
-  // Create user object
-  const user = {
-    cnic,
-    password
-  };
+  try {
+    // Create user object
+    const user = {
+      cnic,
+      password,
+    };
 
-  // Send user data to your backend
-  fetch(`${BACKEND_URL}/api/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user),
-  })
-  .then(response => response.json())
-  .then(data => {
+    const response = await fetch(`${BACKEND_URL}/api/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Login failed');
+    }
+
     if (data.success) {
       // Save the JWT to local storage
       localStorage.setItem('token', data.token);
-      // Redirect the user to the home page
-      window.location.href = '/home';
+       // Navigate to the verification page and pass the degree data to it
+       navigate('/home', { state: { user: data.user } });
     } else {
       alert(data.message);
     }
-  });
+  } catch (error) {
+    // Show an error message
+    console.error(error);
+    // Handle the error as needed
+  }
 };
+
 
 return (
   <div className="login-container" style={{ display: 'flex' }}>

@@ -35,10 +35,26 @@
   cursor: pointer;
   /* width: 100%; */
   margin-top: 10px;
+  margin-left: 10px;
 }
 
 .logout-button:hover {
   background-color: #ff0000;
+}
+
+.report-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  /* width: 100%; */
+  margin-top: 10px;
+}
+
+.report-button:hover {
+  background-color: #0056b3;
 }
 
 .main-content {

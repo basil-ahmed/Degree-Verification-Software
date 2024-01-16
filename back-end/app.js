@@ -30,6 +30,7 @@ mongoose
 // load the dataabase models we want to deal with
 const { User } = require('./models/User')
 const { Degree } = require('./models/Degree')
+const { Report } = require('./models/Report')
 
 app.get("/", (req, res) => {
     res.send("Hello!")
@@ -46,7 +47,7 @@ app.post("/api/login", async (req, res) => {
 
   // User is authenticated, generate a JWT
   const token = jwt.sign({ _id: user._id }, 'BASIL', { expiresIn: '1h' });
-  res.json({ success: true, token });
+  res.json({ success: true, token, user });
 });
 
 app.post("/api/signup", async (req, res) => {
@@ -81,7 +82,52 @@ app.post("/api/verification", async (req, res) => {
   
     // Degree is found, return the degree
     res.json({ success: true, degree });
-  });
+});
+
+app.get("/api/report", async (req, res) => {
+  const { cnic } = req.query;
+
+  // Find Report with provided CNIC
+  const report = await Report.findOne({ cnic });
+  // const report = await Report.findOne({ user.username, user.cnic, user.mobile, user.email })
+  if (!report) {
+    return res.status(400).json({ success: false, message: "User hasn't verified any degrees" });
+  }
+
+  res.json({ success: true, report });
+});
+
+app.post("/api/report", async (req, res) => {
+
+  const { username, cnic, mobile, email, verifiedDegrees } = req.body;
+  
+  try {
+    // Check if a report for this user already exists
+    let report = await Report.findOne({ cnic });
+
+    if (report) {
+      // If a report already exists, add the new degree to the verifiedDegrees array
+      report.verifiedDegrees.push(...verifiedDegrees);
+    } else {
+      // If no report exists, create a new one
+      report = new Report({
+        username,
+        cnic,
+        mobile,
+        email,
+        verifiedDegrees,
+      });
+    }
+
+    // Save the report
+    await report.save();
+
+    res.json({ success: true, report });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
 
 app.use(expressJwt({ secret: 'BASIL', algorithms: ['HS256'] }).unless({ path: ['/api/login', '/api/signup'] }));
 
