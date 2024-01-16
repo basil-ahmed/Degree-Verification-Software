@@ -20,6 +20,7 @@ mongoose
 // load the dataabase models we want to deal with
 const { User } = require('./models/User')
 const { Degree } = require('./models/Degree')
+const { Report } = require('./models/Report')
 
 app.get("/", (req, res) => {
     res.send("Hello!")
@@ -36,7 +37,7 @@ app.post("/api/login", async (req, res) => {
 
   // User is authenticated, generate a JWT
   const token = jwt.sign({ _id: user._id }, 'BASIL', { expiresIn: '1h' });
-  res.json({ success: true, token, user: user });
+  res.json({ success: true, token, user });
 });
 
 app.post("/api/signup", async (req, res) => {
@@ -71,7 +72,19 @@ app.post("/api/verification", async (req, res) => {
   
     // Degree is found, return the degree
     res.json({ success: true, degree });
-  });
+});
+
+app.post("/api/report", async (req, res) => {
+  const { cnic } = req.body;
+
+  // Find user with provided CNIC
+  const user = await User.findOne({ cnic });
+  if (!user) {
+    return res.status(400).json({ success: false, message: "User Doesn't Exist" });
+  }
+
+  res.json({ success: true, user });
+});
 
 app.use(expressJwt({ secret: 'BASIL', algorithms: ['HS256'] }).unless({ path: ['/api/login', '/api/signup'] }));
 

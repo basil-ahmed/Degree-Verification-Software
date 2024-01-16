@@ -1,6 +1,6 @@
 // require("dotenv").config({ silent: true });
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate
 import {Html5QrcodeScanner} from 'html5-qrcode'; // Import QR scanner
 import './home.css';
 
@@ -9,11 +9,14 @@ const BACKEND_URL = "https://degree-verification-software-server.vercel.app";
 const Home = () => {
 
   const navigate = useNavigate(); // Get the navigate function
+  const location = useLocation();
   const [scanResult, setScanResult] = useState(null); // State to store scan results
   const [degreeSerialNo, setDegreeSerialNo] = useState("");
   const [studentRegistrationNo, setstudentRegistrationNo] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const verifyButtonRef = useRef(null);
+
+  const cnic = location.state.user.cnic;
 
   useEffect(() => {
 
@@ -65,7 +68,29 @@ const Home = () => {
   };
 
   const handleReport = async (e) => {
-    navigate('/report');
+    e.preventDefault();
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/report`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ cnic }),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to generate report');
+      }
+  
+      // Navigate to the verification page and pass the degree data to it
+      navigate('/report', { state: { report: data.report } });
+    } catch (error) {
+      // Show an error message
+      console.error(error);
+      setErrorMessage(error.message);
+    }
   };
 
   const handleVerify = async (e) => {

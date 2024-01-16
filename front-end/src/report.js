@@ -8,6 +8,8 @@ const Report = () => {
     const navigate = useNavigate();
     const user = location.state.user;
 
+    console.log(user);
+
     useEffect(() => {
       // Change the background color when the component mounts
       document.body.style.background = `url('/bg2.jpeg')`;
