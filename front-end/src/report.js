@@ -75,6 +75,7 @@ const Report = () => {
           <div className="info-value">
             {report.verifiedDegrees.length}
           </div>
+        </div>
           {degreeDropdownOpen && (
             <div className="degree-dropdown">
               {report.verifiedDegrees.map((degree, index) => (
@@ -84,7 +85,6 @@ const Report = () => {
               ))}
             </div>
           )}
-        </div>
         {selectedDegree && (
           <div className="selected-degree-info">
             <div>Student Name: {selectedDegree.studentName}</div>
