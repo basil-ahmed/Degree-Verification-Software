@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import ExcelExport from 'react-data-export';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 import './report.css';
-const { ExcelFile, ExcelSheet } = ExcelExport;
 
 const Report = () => {
     const location = useLocation();
@@ -85,6 +85,17 @@ const Report = () => {
       },
     ];
 
+    const handleDownload = () => {
+      const ws = XLSX.utils.aoa_to_sheet(dataSet);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Report');
+      const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+      const buf = new ArrayBuffer(wbout.length);
+      const view = new Uint8Array(buf);
+      for (let i = 0; i < wbout.length; i++) view[i] = wbout.charCodeAt(i) & 0xFF;
+      saveAs(new Blob([buf], { type: 'application/octet-stream' }), 'report.xlsx');
+    };
+
   return (
     <div className="verification-container">
       <header className="verification-header">
@@ -142,11 +153,7 @@ const Report = () => {
         )}
         </div>
       </main>
-      <div>
-      <ExcelFile element={<button>Download</button>}>
-        <ExcelSheet dataSet={dataSet} name="Report" />
-      </ExcelFile>
-    </div>
+      <button onClick={handleDownload}>Download</button>
     </div>
   );
 };
