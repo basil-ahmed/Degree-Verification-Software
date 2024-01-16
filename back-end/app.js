@@ -78,12 +78,13 @@ app.post("/api/report", async (req, res) => {
   const { cnic } = req.body;
 
   // Find user with provided CNIC
-  const user = await User.findOne({ cnic });
-  if (!user) {
-    return res.status(400).json({ success: false, message: "User Doesn't Exist" });
+  const report = await Report.findOne({ cnic });
+  // const report = await Report.findOne({ user.username, user.cnic, user.mobile, user.email })
+  if (!report) {
+    return res.status(400).json({ success: false, message: "User hasn't verified any degrees" });
   }
 
-  res.json({ success: true, user });
+  res.json({ success: true, report });
 });
 
 app.use(expressJwt({ secret: 'BASIL', algorithms: ['HS256'] }).unless({ path: ['/api/login', '/api/signup'] }));
