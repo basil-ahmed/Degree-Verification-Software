@@ -74,7 +74,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (verifyButtonRef.current) {
+    if (verifyButtonRef.current && degreeSerialNo.length >= 5) {
       verifyButtonRef.current.click();
     }
   }, [degreeSerialNo, studentRegistrationNo]);
