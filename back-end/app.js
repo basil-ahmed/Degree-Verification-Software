@@ -74,10 +74,10 @@ app.post("/api/verification", async (req, res) => {
     res.json({ success: true, degree });
 });
 
-app.post("/api/report", async (req, res) => {
-  const { cnic } = req.body;
+app.get("/api/report", async (req, res) => {
+  const { cnic } = req.query;
 
-  // Find user with provided CNIC
+  // Find Report with provided CNIC
   const report = await Report.findOne({ cnic });
   // const report = await Report.findOne({ user.username, user.cnic, user.mobile, user.email })
   if (!report) {
@@ -85,6 +85,38 @@ app.post("/api/report", async (req, res) => {
   }
 
   res.json({ success: true, report });
+});
+
+app.post("/api/report", async (req, res) => {
+
+  const { username, cnic, mobile, email, verifiedDegrees } = req.body;
+  
+  try {
+    // Check if a report for this user already exists
+    let report = await Report.findOne({ cnic });
+
+    if (report) {
+      // If a report already exists, add the new degree to the verifiedDegrees array
+      report.verifiedDegrees.push(...verifiedDegrees);
+    } else {
+      // If no report exists, create a new one
+      report = new Report({
+        username,
+        cnic,
+        mobile,
+        email,
+        verifiedDegrees,
+      });
+    }
+
+    // Save the report
+    await report.save();
+
+    res.json({ success: true, report });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
 });
 
 app.use(expressJwt({ secret: 'BASIL', algorithms: ['HS256'] }).unless({ path: ['/api/login', '/api/signup'] }));

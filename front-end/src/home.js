@@ -16,7 +16,7 @@ const Home = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const verifyButtonRef = useRef(null);
 
-  const cnic = location.state.user.cnic;
+  const user = location.state.user;
 
   useEffect(() => {
 
@@ -70,12 +70,11 @@ const Home = () => {
   const handleReport = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${BACKEND_URL}/api/report`, {
-        method: 'POST',
+      const response = await fetch(`${BACKEND_URL}/api/report?cnic=${user.cnic}`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ cnic }),
       });
   
       const data = await response.json();
@@ -109,6 +108,27 @@ const Home = () => {
   
       if (!response.ok) {
         throw new Error(data.message || 'Failed to verify degree');
+      }
+
+      // Send the verified degree details to /api/report
+      const reportResponse = await fetch(`${BACKEND_URL}/api/report`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: user.username,
+          cnic: user.cnic,
+          mobile: user.mobile,
+          email: user.email,
+          verifiedDegrees: [data.degree],
+        }),
+      });
+
+      const reportData = await reportResponse.json();
+
+      if (!reportResponse.ok) {
+        throw new Error(reportData.message || 'Failed to generate report');
       }
   
       // Navigate to the verification page and pass the degree data to it

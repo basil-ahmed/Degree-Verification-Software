@@ -6,9 +6,9 @@ import './report.css';
 const Report = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const user = location.state.user;
+    const report = location.state.report;
 
-    console.log(user);
+    console.log(report);
 
     useEffect(() => {
       // Change the background color when the component mounts
@@ -25,8 +25,8 @@ const Report = () => {
         localStorage.removeItem('token'); // Clear the token from local storage
         // Navigate to the home page
         navigate('/');
-        // Clear the degree data
-        location.state.degree = null;
+        // Clear the report data
+        location.state.report = null;
       };
 
   return (
@@ -41,19 +41,23 @@ const Report = () => {
         <div className="user-info">
           <div className="info-block">
             <label>User's Name</label>
-            <div className="info-value">{user.name}</div>
+            <div className="info-value">{report.name}</div>
           </div>
           <div className="info-block">
             <label>User's CNIC</label>
-            <div className="info-value">{user.cnic}</div>
+            <div className="info-value">{report.cnic}</div>
           </div>
           <div className="info-block">
             <label>User's Email</label>
-            <div className="info-value">{user.email}</div>
+            <div className="info-value">{report.email}</div>
           </div>
           <div className="info-block">
             <label>User's Mobile</label>
-            <div className="info-value">{user.mobile}</div>
+            <div className="info-value">{report.mobile}</div>
+          </div>
+          <div className="info-block">
+            <label>Verified Degrees</label>
+            <div className="info-value">{report.verifiedDegrees}</div>
           </div>
         </div>
       </main>
