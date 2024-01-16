@@ -43,4 +43,5 @@ const Degree = mongoose.model('Degree', degreeSchema);
 
 module.exports = {
     Degree,
+    degreeSchema
 }
