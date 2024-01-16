@@ -100,7 +100,7 @@ const Report = () => {
         <img src="/logo.png" alt="Peoples University of Medical & Health Sciences for Women" />
         <h1>Peoples University of Medical & Health Sciences for Women</h1>
         <button className="report-button" onClick={handleHome}>HOME</button>
-        <button className="verify-logout-button" onClick={handleLogout}>LOG OUT</button>
+        <button className="report-logout-button" onClick={handleLogout}>LOG OUT</button>
       </header>
       <main className="report-main-content">
         <h2>User Report Generated ✅</h2>
@@ -121,7 +121,7 @@ const Report = () => {
             <label>User's Mobile</label>
             <div className="info-value">{report.mobile}</div>
           </div>
-          <div className="info-block" onClick={handleDegreeDropdownClick}>
+          <div className="info-block" id="verified-degrees-drop-down" onClick={handleDegreeDropdownClick}>
           <label>Verified Degrees ⬇</label>
           <div className="info-value">
             {report.verifiedDegrees.length}
