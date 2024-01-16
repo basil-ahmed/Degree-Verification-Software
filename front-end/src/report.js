@@ -93,7 +93,7 @@ const Report = () => {
             <div>Specialization: {selectedDegree.specialization}</div>
             <div>Admission Year: {selectedDegree.admissionYear}</div>
             <div>Graduation Year: {selectedDegree.graduationYear}</div>
-            <div>Degree Issued On: {selectedDegree.degreeIssuedOn}</div>
+            <div>Degree Issued On: {new Date(selectedDegree.degreeIssuedOn).toISOString().split('T')[0]}</div>
             <div>Degree Serial No: {selectedDegree.degreeSerialNo}</div>
             <div>Student Registration No: {selectedDegree.studentRegistrationNo}</div>
           </div>
