@@ -16,9 +16,16 @@ const Home = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const verifyButtonRef = useRef(null);
 
-  const user = location.state.user;
+  // const user = location.state.user;
+
+  // Get the user data from local storage
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
+     // If the user data is not in local storage, get it from location.state.user and store it in local storage
+     if (!user && location.state && location.state.user) {
+      localStorage.setItem('user', JSON.stringify(location.state.user));
+    }
 
     const scanner = new Html5QrcodeScanner('reader',
     { qrbox: {
