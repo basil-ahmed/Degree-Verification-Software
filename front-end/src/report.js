@@ -40,6 +40,9 @@ const Report = () => {
 
     const handleDegreeDropdownClick = () => {
       setDegreeDropdownOpen(!degreeDropdownOpen);
+      if (selectedDegree === degree) {
+        setSelectedDegree(null);
+      }
     };
   
     const handleDegreeClick = (degree) => {
