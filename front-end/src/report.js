@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import ExcelExport from 'react-data-export';
 import './report.css';
+const { ExcelFile, ExcelSheet } = ExcelExport;
 
 const Report = () => {
     const location = useLocation();
@@ -32,6 +34,10 @@ const Report = () => {
         location.state.report = null;
     };
 
+    const handleHome = () => {
+      navigate('/home');
+    };
+
     const handleDegreeDropdownClick = () => {
       setDegreeDropdownOpen(!degreeDropdownOpen);
     };
@@ -44,11 +50,47 @@ const Report = () => {
       }
     };
 
+    const dataSet = [
+      {
+        columns: [
+          'Username',
+          'CNIC',
+          'Mobile',
+          'Email',
+          'Student Name',
+          'Father Name',
+          'Program',
+          'Specialization',
+          'Admission Year',
+          'Graduation Year',
+          'Degree Issued On',
+          'Degree Serial No',
+          'Student Registration No',
+        ],
+        data: report.verifiedDegrees.map((degree) => [
+          report.username,
+          report.cnic,
+          report.mobile,
+          report.email,
+          degree.studentName,
+          degree.fatherName,
+          degree.program,
+          degree.specialization,
+          degree.admissionYear,
+          degree.graduationYear,
+          new Date(degree.degreeIssuedOn).toISOString().split('T')[0],
+          degree.degreeSerialNo,
+          degree.studentRegistrationNo,
+        ]),
+      },
+    ];
+
   return (
     <div className="verification-container">
       <header className="verification-header">
         <img src="/logo.png" alt="Peoples University of Medical & Health Sciences for Women" />
         <h1>Peoples University of Medical & Health Sciences for Women</h1>
+        <button className="report-button" onClick={handleHome}>HOME</button>
         <button className="verify-logout-button" onClick={handleLogout}>LOG OUT</button>
       </header>
       <main className="report-main-content">
@@ -100,6 +142,11 @@ const Report = () => {
         )}
         </div>
       </main>
+      <div>
+      <ExcelFile element={<button>Download</button>}>
+        <ExcelSheet dataSet={dataSet} name="Report" />
+      </ExcelFile>
+    </div>
     </div>
   );
 };
