@@ -49,6 +49,10 @@
     margin-left: 10px;
   }
 
+    .report-logout-button:hover {
+        background-color: #ff0000;
+    }
+
   .download-button {
     background-color: #007bff;
     border: none;
