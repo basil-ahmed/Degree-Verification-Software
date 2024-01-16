@@ -37,7 +37,11 @@ const Report = () => {
     };
   
     const handleDegreeClick = (degree) => {
-      setSelectedDegree(degree);
+      if (selectedDegree === degree) {
+        setSelectedDegree(null);
+      } else {
+        setSelectedDegree(degree);
+      }
     };
 
   return (
@@ -52,7 +56,7 @@ const Report = () => {
         <div className="user-info">
           <div className="info-block">
             <label>User's Name</label>
-            <div className="info-value">{report.name}</div>
+            <div className="info-value">{report.username}</div>
           </div>
           <div className="info-block">
             <label>User's CNIC</label>
