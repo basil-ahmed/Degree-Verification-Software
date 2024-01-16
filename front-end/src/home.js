@@ -22,10 +22,20 @@ const Home = () => {
   const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
+
      // If the user data is not in local storage, get it from location.state.user and store it in local storage
      if (!user && location.state && location.state.user) {
       localStorage.setItem('user', JSON.stringify(location.state.user));
     }
+
+    // If the user data is not in local storage or location.state.user, redirect to the login page
+    if (!user && (!location.state || !location.state.user)) {
+      navigate('/');
+    }
+
+  }, [user, location.state, navigate]);
+
+  useEffect(() => {
 
     const scanner = new Html5QrcodeScanner('reader',
     { qrbox: {
