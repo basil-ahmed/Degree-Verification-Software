@@ -151,7 +151,7 @@ const Report = () => {
         )}
         </div>
       </main>
-      <button onClick={handleDownload}>Download</button>
+      <button className='download-button' onClick={handleDownload}>Download</button>
     </div>
   );
 };
